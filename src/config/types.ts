@@ -1,8 +1,8 @@
-import z from "zod";
+import type z from "zod";
 
 export type ActionState<T = unknown> = {
   success: boolean;
-  data?: Record<keyof T, unknown> | {};
+  data?: {} & Record<keyof T, unknown>;
   message?: string;
   errors?: FlattenedError<T>;
 };

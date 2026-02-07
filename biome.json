@@ -30,7 +30,20 @@
   "assist": {
     "actions": {
       "source": {
-        "organizeImports": "on"
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "groups": [
+              ":PACKAGE:",
+              ":BLANK_LINE:",
+              ["@/config/**", "@/generated/**"],
+              ":BLANK_LINE:",
+              ["@/schemas/**", "@/lib/**", "@/app/**"],
+              ":BLANK_LINE:",
+              ["./**"]
+            ]
+          }
+        }
       }
     }
   },

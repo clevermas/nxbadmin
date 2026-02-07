@@ -1,20 +1,24 @@
+import { Eye, EyeClosed } from "lucide-react";
+import type React from "react";
+import { useState } from "react";
+
+import { cn } from "@/lib/utils";
+
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
-import { cn } from "@/lib/utils";
-import { Eye, EyeClosed } from "lucide-react";
-import { useState } from "react";
 
 interface PasswordStrengthProps {
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  id: string;
+  children?: React.ReactNode;
 }
 
 export const PasswordStrength = ({
   value,
   onChange,
-  id,
-}: PasswordStrengthProps) => {
+  children,
+  ...props
+}: React.ComponentProps<"input"> & PasswordStrengthProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const calcScore = () => {
@@ -39,11 +43,11 @@ export const PasswordStrength = ({
     <>
       <div className="relative">
         <Input
-          id={id}
           type={showPassword ? "text" : "password"}
           value={value}
           onChange={onChange}
           placeholder="Enter your password"
+          {...props}
         />
         <button
           type="button"
@@ -54,17 +58,19 @@ export const PasswordStrength = ({
         </button>
       </div>
 
+      {children}
+
       <div className="flex flex-col gap-4 mt-2">
-        {text && <span className="font-medium">{text}</span>}
+        {text && <span className="font-medium text-primary">{text}</span>}
 
         <Progress value={progress} className="mt-0" color={color} />
 
         {score < 4 && (
           <>
-            <span className="font-medium">Must include:</span>
+            <span className="font-medium text-primary">Must include:</span>
 
             <ul className="mt-0">
-              {rules.map((rule, i) => (
+              {rules.map((rule) => (
                 <li
                   key={rule.text}
                   className={cn(

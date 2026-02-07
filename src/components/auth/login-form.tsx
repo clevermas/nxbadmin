@@ -1,15 +1,18 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import { useActionState, useEffect } from "react";
+
+import type { ActionState } from "@/config/types";
+
 import { loginAction } from "@/app/auth/_actions/login";
+import { actionStateFormHandler, initialActionState } from "@/lib/form";
+import type { LoginSchema } from "@/schemas/auth.schema";
+
 import { SubmitButton } from "@/components/shared/submit-button";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { FormError } from "@/components/ui/form-messages";
 import { Input } from "@/components/ui/input";
-import { ActionState } from "@/config/types";
-import { actionStateFormHandler, initialActionState } from "@/lib/form";
-import { LoginSchema } from "@/schemas/auth.schema";
-import { useRouter } from "next/navigation";
-import { useActionState, useEffect } from "react";
 
 export const LoginForm = () => {
   const [state, formAction] = useActionState(loginAction, initialActionState());

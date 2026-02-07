@@ -1,9 +1,10 @@
-import {
+import type { FieldValues, Path, UseFormSetError } from "react-hook-form";
+
+import type {
   ActionState,
   ActionStateFormRecord,
   FlattenedError,
 } from "@/config/types";
-import { FieldValues, Path, UseFormSetError } from "react-hook-form";
 
 export const hookFormErrorHandler = <T extends FieldValues>(
   errors: FlattenedError<T>,

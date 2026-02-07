@@ -1,17 +1,20 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Controller, type SubmitHandler, useForm } from "react-hook-form";
+
+import type { FlattenedError } from "@/config/types";
+
 import { registerAction } from "@/app/auth/_actions/register";
+import { hookFormErrorHandler } from "@/lib/form";
+import { RegisterSchema } from "@/schemas/auth.schema";
+
 import { SubmitButton } from "@/components/shared/submit-button";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { FormError, FormSuccess } from "@/components/ui/form-messages";
 import { Input } from "@/components/ui/input";
-import { FlattenedError } from "@/config/types";
-import { hookFormErrorHandler } from "@/lib/form";
-import { RegisterSchema } from "@/schemas/auth.schema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { PasswordStrength } from "./password-strength";
 
 export const RegisterForm = () => {
@@ -48,7 +51,7 @@ export const RegisterForm = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="flex w-full flex-col gap-5"
     >
-      <Field>
+      <Field data-invalid={!!errors.name}>
         <FieldLabel htmlFor="name">Name</FieldLabel>
         <Controller
           name="name"
@@ -59,13 +62,14 @@ export const RegisterForm = () => {
               id="name"
               placeholder="Name"
               autoComplete="name"
+              aria-invalid={!!errors.name}
             />
           )}
         />
         <FieldError>{errors.name?.message}</FieldError>
       </Field>
 
-      <Field>
+      <Field data-invalid={!!errors.email}>
         <FieldLabel htmlFor="email">Email</FieldLabel>
         <Controller
           name="email"
@@ -76,13 +80,14 @@ export const RegisterForm = () => {
               id="email"
               placeholder="Email"
               autoComplete="email"
+              aria-invalid={!!errors.email}
             />
           )}
         />
         <FieldError>{errors.email?.message}</FieldError>
       </Field>
 
-      <Field>
+      <Field data-invalid={!!errors.password}>
         <FieldLabel htmlFor="password">Password</FieldLabel>
         <Controller
           name="password"
@@ -92,10 +97,12 @@ export const RegisterForm = () => {
               id="password"
               value={field.value}
               onChange={field.onChange}
-            />
+              aria-invalid={!!errors.password}
+            >
+              <FieldError>{errors.password?.message}</FieldError>
+            </PasswordStrength>
           )}
         />
-        <FieldError>{errors.password?.message}</FieldError>
       </Field>
 
       <FormSuccess message={successMessage} />

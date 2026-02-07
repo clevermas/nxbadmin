@@ -1,10 +1,12 @@
 "use server";
 
+import { APIError } from "better-auth/api";
+
 import { routes } from "@/config/routes";
+
 import { Action } from "@/lib/action";
 import { auth } from "@/lib/auth";
 import { RegisterSchema } from "@/schemas/auth.schema";
-import { APIError } from "better-auth/api";
 
 export const registerAction = Action(RegisterSchema, async (data, res) => {
   try {

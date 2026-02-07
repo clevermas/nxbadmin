@@ -9,7 +9,7 @@ export const loginAction = FormAction(LoginSchema, async (_, data, res) => {
     await auth.api.signInEmail({ body: data });
 
     return res.success("Login successful");
-  } catch (e) {
+  } catch (_) {
     return res.error("Invalid credentials");
   }
 });

@@ -1,5 +1,6 @@
-import { ActionResponse, ActionState } from "@/config/types";
 import z from "zod";
+
+import type { ActionResponse, ActionState } from "@/config/types";
 
 export function Action<InputData extends z.ZodObject<z.ZodRawShape>>(
   validator: InputData,
