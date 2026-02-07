@@ -1,9 +1,10 @@
 import "dotenv/config";
 
+import { PrismaClient } from "@/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import { PrismaClient } from "@/generated/prisma/client";
+import { nextCookies } from "better-auth/next-js";
 
 const connectionString = process.env.DATABASE_URL;
 const adapter = new PrismaPg({ connectionString });
@@ -16,4 +17,5 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
+  plugins: [nextCookies()],
 });
