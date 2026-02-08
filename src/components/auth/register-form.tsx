@@ -11,11 +11,11 @@ import { registerAction } from "@/app/auth/_actions/register";
 import { hookFormErrorHandler } from "@/lib/form";
 import { RegisterSchema } from "@/schemas/auth.schema";
 
+import { PasswordStrength } from "./password-strength";
 import { SubmitButton } from "@/components/shared/submit-button";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { FormError, FormSuccess } from "@/components/ui/form-messages";
 import { Input } from "@/components/ui/input";
-import { PasswordStrength } from "./password-strength";
 
 export const RegisterForm = () => {
   const [successMessage, setSuccessMessage] = useState("");
