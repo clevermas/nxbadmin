@@ -1,8 +1,9 @@
 "use client";
 
-import { UserWithRole } from "better-auth/plugins";
+import type { UserWithRole } from "better-auth/plugins";
 import { format } from "date-fns";
 
+import { UserTableSort as Sort } from "./user-table-sort";
 import { DataTableProvider } from "@/components/shared/data-table-provider";
 import {
   DataTableFilterDebounce,
@@ -21,7 +22,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { UserTableSort as Sort } from "./user-table-sort";
 
 interface UserTableProps {
   data: UserWithRole[];

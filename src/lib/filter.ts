@@ -1,10 +1,10 @@
 import {
   createLoader,
   createParser,
-  ParserMap,
-  SearchParams,
+  type ParserMap,
+  type SearchParams,
 } from "nuqs/server";
-import { z } from "zod";
+import type { z } from "zod";
 
 import { toConstTuple } from "@/lib/utils";
 

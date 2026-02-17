@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import { sortParser, UserTableColumns } from "@/schemas/user-table.schema";
+import { sortParser, type UserTableColumns } from "@/schemas/user-table.schema";
 
 import { DataTableContext } from "@/components/shared/data-table-provider";
 import { FilterSortButton } from "@/components/shared/filter/sort-button";

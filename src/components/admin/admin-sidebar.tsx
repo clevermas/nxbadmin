@@ -1,13 +1,13 @@
 import type * as React from "react";
 
+import { AdminSidebarNav } from "./admin-sidebar-nav";
+import { AdminSidebarUserMenu } from "./admin-sidebar-user-menu";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
 } from "@/components/ui/sidebar";
-import { AdminSidebarNav } from "./admin-sidebar-nav";
-import { AdminSidebarUserMenu } from "./admin-sidebar-user-menu";
 
 const nav = [
   {

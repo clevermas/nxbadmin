@@ -2,7 +2,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { routes } from "@/config/routes";
-import { PageProps } from "@/config/types";
+import type { PageProps } from "@/config/types";
 
 import { auth } from "@/lib/auth";
 import { defaultFilterSearchParams, filterLoader } from "@/lib/filter";

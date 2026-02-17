@@ -1,5 +1,10 @@
-import { SingleParserBuilder, useQueryState } from "nuqs";
-import { TransitionStartFunction, useEffect, useRef, useState } from "react";
+import { type SingleParserBuilder, useQueryState } from "nuqs";
+import {
+  type TransitionStartFunction,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { useDebounce } from "@/hooks/use-debounce";
 

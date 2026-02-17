@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import {
   createFilterParser,
-  DefaultFilterOrder,
+  type DefaultFilterOrder,
   defaultFilterOrder,
 } from "@/lib/filter";
 import { toConstTuple } from "@/lib/utils";

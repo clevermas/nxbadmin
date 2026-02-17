@@ -1,4 +1,5 @@
 "use client";
+import type React from "react";
 import { useContext, useEffect, useRef } from "react";
 
 import { routes } from "@/config/routes";
@@ -6,12 +7,12 @@ import { routes } from "@/config/routes";
 import { defaultFilterLimit } from "@/lib/filter";
 import { limitParser, pageParser, searchParser } from "@/schemas/filter.schema";
 
-import { DataTableContext } from "@/components/shared/data-table-provider";
-import { useLimit, usePagination } from "@/hooks/filter/use-pagination";
-import { useSearch } from "@/hooks/filter/use-search";
 import { FilterLimit } from "./limit";
 import { FilterPagination } from "./pagination";
 import { FilterSearch } from "./search";
+import { DataTableContext } from "@/components/shared/data-table-provider";
+import { useLimit, usePagination } from "@/hooks/filter/use-pagination";
+import { useSearch } from "@/hooks/filter/use-search";
 
 // Pagination
 interface DataTableFilterPaginationProps {
@@ -76,9 +77,11 @@ export const DataTableFilterSearch = () => {
 // Debounce
 interface DataTableFilterDebounceProps {
   value?: number;
+  children?: React.ReactNode;
 }
 export const DataTableFilterDebounce = ({
   value,
+  children,
 }: DataTableFilterDebounceProps) => {
   const {
     filter: { transition, startTransition },
@@ -114,5 +117,5 @@ export const DataTableFilterDebounce = ({
     };
   }, [debounce, transition, startTransition]);
 
-  return <></>;
+  return <>{children}</>;
 };

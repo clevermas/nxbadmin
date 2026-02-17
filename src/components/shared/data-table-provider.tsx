@@ -1,8 +1,8 @@
 "use client";
 import {
   createContext,
-  ReactNode,
-  TransitionStartFunction,
+  type ReactNode,
+  type TransitionStartFunction,
   useTransition,
 } from "react";
 

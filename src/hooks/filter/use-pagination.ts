@@ -1,5 +1,5 @@
-import { SingleParserBuilder, useQueryState } from "nuqs";
-import { TransitionStartFunction } from "react";
+import { type SingleParserBuilder, useQueryState } from "nuqs";
+import type { TransitionStartFunction } from "react";
 
 interface UsePaginationProps {
   pageParser: SingleParserBuilder<number | null | undefined>;
