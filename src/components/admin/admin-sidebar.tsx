@@ -1,7 +1,4 @@
-import { headers } from "next/headers";
 import type * as React from "react";
-
-import { auth } from "@/lib/auth";
 
 import {
   Sidebar,
@@ -26,13 +23,18 @@ const nav = [
   },
 ];
 
+interface AdminSidebarProps {
+  user: {
+    name: string;
+    email: string;
+  };
+}
+
 export const AdminSidebar = async ({
+  user,
   ...props
-}: React.ComponentProps<typeof Sidebar>) => {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-  const { name, email } = session?.user as { name: string; email: string };
+}: AdminSidebarProps & React.ComponentProps<typeof Sidebar>) => {
+  const { name, email } = user;
 
   return (
     <Sidebar variant="inset" {...props}>
