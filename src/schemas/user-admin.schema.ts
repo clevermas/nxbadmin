@@ -10,6 +10,7 @@ export const UserDetailsSchema = z.object({
   role: z.enum(userRoles, {
     message: "Invalid role",
   }),
+  emailVerified: z.boolean(),
 });
 
 export type UserDetailsSchema = z.infer<typeof UserDetailsSchema>;

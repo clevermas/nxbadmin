@@ -27,6 +27,7 @@ interface UpdateUserDetailsFormProps {
     name: string;
     email: string;
     role: string | null;
+    emailVerified: boolean;
   };
 }
 
@@ -39,6 +40,7 @@ export const UpdateUserDetailsForm = ({ user }: UpdateUserDetailsFormProps) => {
       name: user.name,
       email: user.email,
       role: (user.role as UserRole) || UserRole.User,
+      emailVerified: user.emailVerified,
     },
   });
   const { handleSubmit, formState, setError, reset } = form;

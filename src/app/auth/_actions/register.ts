@@ -19,7 +19,9 @@ export const registerAction = createAction(
         },
       });
 
-      return res.success("Registration successful");
+      return res.success(
+        "Registration successful. Please check your email to verify your account",
+      );
     } catch (e) {
       if (e instanceof APIError) {
         if (e.status === "UNPROCESSABLE_ENTITY") {

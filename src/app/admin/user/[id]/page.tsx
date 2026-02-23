@@ -35,6 +35,7 @@ export default async function AdminUserProfilePage({
       name: true,
       email: true,
       role: true,
+      emailVerified: true,
     },
   });
 

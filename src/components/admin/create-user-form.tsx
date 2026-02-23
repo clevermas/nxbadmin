@@ -38,6 +38,7 @@ export const CreateUserForm = ({
       role: UserRole.User,
       password: "",
       confirmPassword: "",
+      emailVerified: false,
     },
   });
 

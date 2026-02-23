@@ -13,7 +13,7 @@ export const createUserAction = createAction(
   CreateUserSchema,
   async (data, res) => {
     try {
-      await auth.api.createUser({
+      const result = await auth.api.createUser({
         body: {
           name: data.name,
           email: data.email,
@@ -22,6 +22,18 @@ export const createUserAction = createAction(
         },
         headers: await headers(),
       });
+
+      if (result?.user && data.emailVerified) {
+        await auth.api.adminUpdateUser({
+          body: {
+            userId: result.user.id,
+            data: {
+              emailVerified: true,
+            },
+          },
+          headers: await headers(),
+        });
+      }
 
       revalidatePath(routes.admin);
 

@@ -1,5 +1,6 @@
 "use client";
 
+import { CircleCheck } from "lucide-react";
 import { Controller, useFormContext } from "react-hook-form";
 
 import { userRoles } from "@/config/const";
@@ -9,13 +10,8 @@ import type { UserDetailsSchema } from "@/schemas/user-admin.schema";
 
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Toggle } from "@/components/ui/toggle";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 export const EditUserDetailsFields = () => {
   const context = useFormContext<UserDetailsSchema>();
@@ -64,28 +60,58 @@ export const EditUserDetailsFields = () => {
         <FieldError>{errors.email?.message}</FieldError>
       </Field>
 
-      <Field data-invalid={!!errors.role}>
-        <FieldLabel>Role</FieldLabel>
-        <Controller
-          name="role"
-          control={control}
-          render={({ field }) => (
-            <Select onValueChange={field.onChange} defaultValue={field.value}>
-              <SelectTrigger aria-invalid={!!errors.role} id="role">
-                <SelectValue placeholder="Select a role" />
-              </SelectTrigger>
-              <SelectContent>
+      <div className="grid grid-cols-2 gap-4">
+        <Field data-invalid={!!errors.role}>
+          <FieldLabel htmlFor="role-user">Role</FieldLabel>
+          <Controller
+            name="role"
+            control={control}
+            render={({ field }) => (
+              <ToggleGroup
+                type="single"
+                value={field.value}
+                onValueChange={(val: string) => val && field.onChange(val)}
+                className="justify-start"
+                variant="outline"
+              >
                 {userRoles.map((r) => (
-                  <SelectItem key={r} value={r}>
+                  <ToggleGroupItem
+                    id={`role-${r}`}
+                    key={r}
+                    value={r}
+                    aria-label={`Select ${r} role`}
+                    className="flex-1"
+                  >
                     {toTitleCase(r)}
-                  </SelectItem>
+                  </ToggleGroupItem>
                 ))}
-              </SelectContent>
-            </Select>
-          )}
-        />
-        <FieldError>{errors.role?.message}</FieldError>
-      </Field>
+              </ToggleGroup>
+            )}
+          />
+          <FieldError>{errors.role?.message}</FieldError>
+        </Field>
+
+        <Field>
+          <FieldLabel htmlFor="emailVerified">Status</FieldLabel>
+          <Controller
+            name="emailVerified"
+            control={control}
+            render={({ field }) => (
+              <Toggle
+                id="emailVerified"
+                pressed={field.value}
+                onPressedChange={field.onChange}
+                aria-label="Toggle email verification"
+                className="w-full justify-between px-3"
+                variant="outline"
+              >
+                Email Verified
+                {field.value && <CircleCheck size={16} />}
+              </Toggle>
+            )}
+          />
+        </Field>
+      </div>
     </>
   );
 };

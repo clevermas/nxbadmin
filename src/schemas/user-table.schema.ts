@@ -10,6 +10,7 @@ import { toConstTuple } from "@/lib/utils";
 export enum UserTableColumns {
   Name = "name",
   Email = "email",
+  EmailVerified = "emailVerified",
   Role = "role",
   CreatedAt = "createdAt",
 }

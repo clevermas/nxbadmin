@@ -8,9 +8,6 @@ import { UserRole } from "@/config/const";
 
 import { cn } from "@/lib/utils";
 
-import { CreateUserDialog } from "./create-user-dialog";
-import { UserTableActions } from "./user-table-actions";
-import { UserTableSort as Sort } from "./user-table-sort";
 import { DataTableProvider } from "@/components/shared/data-table-provider";
 import {
   DataTableFilterDebounce,
@@ -31,6 +28,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { CreateUserDialog } from "./create-user-dialog";
+import { UserTableActions } from "./user-table-actions";
+import { UserTableSort as Sort } from "./user-table-sort";
 
 interface UserTableProps {
   data: UserWithRole[];
@@ -71,7 +71,10 @@ const UserTable = ({ data, totalPages }: UserTableProps) => {
                   <Sort column="name">Name</Sort>
                 </TableHead>
                 <TableHead>
-                  <Sort column="email">Email</Sort>
+                  <Sort column="verified">Email</Sort>
+                </TableHead>
+                <TableHead>
+                  <Sort column="emailVerified">Verified</Sort>
                 </TableHead>
                 <TableHead>
                   <Sort column="role">Role</Sort>
@@ -87,6 +90,13 @@ const UserTable = ({ data, totalPages }: UserTableProps) => {
                 <TableRow key={user.id} className="h-12">
                   <TableCell className="pl-4">{user.name}</TableCell>
                   <TableCell>{user.email}</TableCell>
+                  <TableCell>
+                    {user.emailVerified && (
+                      <Badge variant="secondary" className="capitalize">
+                        Verified
+                      </Badge>
+                    )}
+                  </TableCell>
                   <TableCell>
                     <Badge
                       className={cn(
@@ -109,7 +119,7 @@ const UserTable = ({ data, totalPages }: UserTableProps) => {
               ))}
               {!data.length && (
                 <TableRow className="h-60">
-                  <TableCell colSpan={4}>
+                  <TableCell colSpan={6}>
                     <NoData className="m-0" />
                   </TableCell>
                 </TableRow>
@@ -117,7 +127,7 @@ const UserTable = ({ data, totalPages }: UserTableProps) => {
             </TableBody>
             <TableFooter>
               <TableRow className="h-12">
-                <TableCell colSpan={5}>
+                <TableCell colSpan={6}>
                   {totalPages > 1 && (
                     <div className="flex justify-end items-center gap-4">
                       <DataTableFilterPagination
