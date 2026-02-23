@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { FieldValues, UseFormHandleSubmit } from "react-hook-form";
+import type { FieldValues, UseFormHandleSubmit } from "react-hook-form";
 
 interface UseSubmitWithConfirmProps<TFieldValues extends FieldValues> {
   onSubmit: (data: TFieldValues) => void;

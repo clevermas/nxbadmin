@@ -1,11 +1,11 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { TransitionStartFunction } from "react";
+import type { TransitionStartFunction } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { UserRole } from "@/config/const";
-import { FlattenedError } from "@/config/types";
+import type { FlattenedError } from "@/config/types";
 
 import { createUserAction } from "@/app/admin/_actions/create-user";
 import {
@@ -15,9 +15,9 @@ import {
 } from "@/lib/form";
 import { CreateUserSchema } from "@/schemas/user-admin.schema";
 
-import { SubmitButton } from "@/components/shared/submit-button";
 import { EditUserDetailsFields } from "./user-details-fields";
 import { EditUserPasswordFields } from "./user-password-fields";
+import { SubmitButton } from "@/components/shared/submit-button";
 
 interface CreateUserFormProps {
   transition: boolean;

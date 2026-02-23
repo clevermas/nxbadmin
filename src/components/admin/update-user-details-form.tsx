@@ -5,7 +5,7 @@ import { useTransition } from "react";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
 
 import { UserRole } from "@/config/const";
-import { type FlattenedError } from "@/config/types";
+import type { FlattenedError } from "@/config/types";
 
 import { updateUserDetailsAction } from "@/app/admin/_actions/update-user-details";
 import {
@@ -14,12 +14,12 @@ import {
   submitButtonProps,
 } from "@/lib/form";
 import {
-  UpdateUserDetailsSchema,
+  type UpdateUserDetailsSchema,
   UserDetailsSchema,
 } from "@/schemas/user-admin.schema";
 
-import { SubmitButton } from "@/components/shared/submit-button";
 import { EditUserDetailsFields } from "./user-details-fields";
+import { SubmitButton } from "@/components/shared/submit-button";
 
 interface UpdateUserDetailsFormProps {
   user: {

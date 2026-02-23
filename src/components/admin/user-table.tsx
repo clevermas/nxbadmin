@@ -8,6 +8,9 @@ import { UserRole } from "@/config/const";
 
 import { cn } from "@/lib/utils";
 
+import { CreateUserDialog } from "./create-user-dialog";
+import { UserTableActions } from "./user-table-actions";
+import { UserTableSort as Sort } from "./user-table-sort";
 import { DataTableProvider } from "@/components/shared/data-table-provider";
 import {
   DataTableFilterDebounce,
@@ -17,6 +20,7 @@ import {
 } from "@/components/shared/filter/data-table";
 import { NoData } from "@/components/shared/no-data";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Table,
@@ -27,10 +31,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { CreateUserDialog } from "./create-user-dialog";
-import { UserTableActions } from "./user-table-actions";
-import { UserTableSort as Sort } from "./user-table-sort";
 
 interface UserTableProps {
   data: UserWithRole[];

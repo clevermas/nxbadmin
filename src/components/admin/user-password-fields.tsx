@@ -2,10 +2,10 @@
 
 import { Controller, useFormContext } from "react-hook-form";
 
-import { UserPasswordSchema } from "@/schemas/user-admin.schema";
+import type { UserPasswordSchema } from "@/schemas/user-admin.schema";
 
-import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { PasswordInput } from "@/components/shared/password-input";
+import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 
 export const EditUserPasswordFields = () => {
   const context = useFormContext<UserPasswordSchema>();

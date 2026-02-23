@@ -5,7 +5,7 @@ import { Controller, useFormContext } from "react-hook-form";
 import { userRoles } from "@/config/const";
 
 import { toTitleCase } from "@/lib/utils";
-import { UserDetailsSchema } from "@/schemas/user-admin.schema";
+import type { UserDetailsSchema } from "@/schemas/user-admin.schema";
 
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";

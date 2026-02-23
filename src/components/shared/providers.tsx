@@ -2,8 +2,8 @@
 
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
   return (

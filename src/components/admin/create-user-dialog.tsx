@@ -2,6 +2,8 @@
 
 import { useContext, useState } from "react";
 
+import { CreateUserForm } from "./create-user-form";
+import { DataTableContext } from "@/components/shared/data-table-provider";
 import {
   Dialog,
   DialogContent,
@@ -9,8 +11,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { DataTableContext } from "@/components/shared/data-table-provider";
-import { CreateUserForm } from "./create-user-form";
 
 interface CreateUserDialogProps {
   children: React.ReactNode;

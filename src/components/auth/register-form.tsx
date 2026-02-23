@@ -15,11 +15,11 @@ import {
 } from "@/lib/form";
 import { RegisterSchema } from "@/schemas/auth.schema";
 
+import { PasswordInputStrength } from "./password-input-strength";
 import { PasswordInput } from "@/components/shared/password-input";
 import { SubmitButton } from "@/components/shared/submit-button";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { PasswordInputStrength } from "./password-input-strength";
 
 export const RegisterForm = () => {
   const [transition, startTransition] = useTransition();

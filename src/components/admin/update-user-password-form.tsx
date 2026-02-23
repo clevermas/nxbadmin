@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTransition } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { type FlattenedError } from "@/config/types";
+import type { FlattenedError } from "@/config/types";
 
 import { updateUserPasswordAction } from "@/app/admin/_actions/update-user-password";
 import {
@@ -13,14 +13,14 @@ import {
   submitButtonProps,
 } from "@/lib/form";
 import {
-  UpdateUserPasswordSchema,
+  type UpdateUserPasswordSchema,
   UserPasswordSchema,
 } from "@/schemas/user-admin.schema";
 
+import { EditUserPasswordFields } from "./user-password-fields";
 import { ConfirmDialog } from "@/components/shared/confirm-dialog";
 import { SubmitButton } from "@/components/shared/submit-button";
 import { useConfirmSubmit } from "@/hooks/use-confirm-submit";
-import { EditUserPasswordFields } from "./user-password-fields";
 
 interface UpdateUserPasswordFormProps {
   user: {
