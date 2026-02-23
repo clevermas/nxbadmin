@@ -2,16 +2,15 @@
 
 import { useRouter } from "next/navigation";
 import { useActionState, useEffect } from "react";
-
-import type { ActionState } from "@/config/types";
+import { toast } from "sonner";
 
 import { loginAction } from "@/app/auth/_actions/login";
+import type { ActionState } from "@/lib/action";
 import { actionStateFormHandler, initialActionState } from "@/lib/form";
 import type { LoginSchema } from "@/schemas/auth.schema";
 
 import { SubmitButton } from "@/components/shared/submit-button";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
-import { FormError } from "@/components/ui/form-messages";
 import { Input } from "@/components/ui/input";
 
 export const LoginForm = () => {
@@ -26,7 +25,10 @@ export const LoginForm = () => {
     if (state.success) {
       router.refresh();
     }
-  }, [state, router]);
+    if (error()) {
+      toast.error(error());
+    }
+  }, [state, router, error]);
 
   return (
     <form action={formAction}>
@@ -59,7 +61,6 @@ export const LoginForm = () => {
 
         <div className="space-y-4">
           <SubmitButton disabled={state.success}>Login</SubmitButton>
-          <FormError message={error()} />
         </div>
       </div>
     </form>

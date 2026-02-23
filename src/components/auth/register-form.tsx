@@ -2,49 +2,53 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useTransition } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 
 import type { FlattenedError } from "@/config/types";
 
 import { registerAction } from "@/app/auth/_actions/register";
-import { hookFormErrorHandler } from "@/lib/form";
+import {
+  actionToast,
+  hookFormErrorHandler,
+  submitButtonProps,
+} from "@/lib/form";
 import { RegisterSchema } from "@/schemas/auth.schema";
 
-import { PasswordStrength } from "./password-strength";
+import { PasswordInput } from "@/components/shared/password-input";
 import { SubmitButton } from "@/components/shared/submit-button";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
-import { FormError, FormSuccess } from "@/components/ui/form-messages";
 import { Input } from "@/components/ui/input";
+import { PasswordInputStrength } from "./password-input-strength";
 
 export const RegisterForm = () => {
-  const [successMessage, setSuccessMessage] = useState("");
+  const [transition, startTransition] = useTransition();
   const router = useRouter();
 
-  const {
-    handleSubmit,
-    formState: { errors, isSubmitting },
-    setError,
-    control,
-  } = useForm({
+  const form = useForm({
     resolver: zodResolver(RegisterSchema),
     defaultValues: { name: "", email: "", password: "" },
   });
 
-  const onSubmit: SubmitHandler<RegisterSchema> = async (data) => {
-    const result = await registerAction(data);
+  const { handleSubmit, control, formState, setError } = form;
+  const errors = formState.errors;
+  const submit = submitButtonProps(formState, transition);
 
-    if (result.success) {
-      setSuccessMessage(result.message || "");
-      setTimeout(router.refresh, 3000);
-    } else {
-      hookFormErrorHandler(
-        result.errors as FlattenedError<RegisterSchema>,
-        setError,
-      );
-      setSuccessMessage("");
-    }
-  };
+  const onSubmit: SubmitHandler<RegisterSchema> = async (data) =>
+    startTransition(async () => {
+      const result = await actionToast(registerAction(data), {
+        loading: "Registering...",
+      });
+
+      if (!result.success) {
+        hookFormErrorHandler(
+          result.errors as FlattenedError<RegisterSchema>,
+          setError,
+        );
+      } else {
+        router.refresh();
+      }
+    });
 
   return (
     <form
@@ -93,23 +97,22 @@ export const RegisterForm = () => {
           name="password"
           control={control}
           render={({ field }) => (
-            <PasswordStrength
-              id="password"
-              value={field.value}
-              onChange={field.onChange}
-              aria-invalid={!!errors.password}
-            >
+            <>
+              <PasswordInput
+                id="password"
+                value={field.value}
+                onChange={field.onChange}
+                aria-invalid={!!errors.password}
+                placeholder="Password"
+              />
               <FieldError>{errors.password?.message}</FieldError>
-            </PasswordStrength>
+              <PasswordInputStrength value={field.value} />
+            </>
           )}
         />
       </Field>
 
-      <FormSuccess message={successMessage} />
-      <FormError message={errors.root?.message} />
-      {!successMessage && (
-        <SubmitButton disabled={isSubmitting}>Register</SubmitButton>
-      )}
+      <SubmitButton {...submit}>Register</SubmitButton>
     </form>
   );
 };

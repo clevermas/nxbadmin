@@ -2,8 +2,12 @@
 
 import type { UserWithRole } from "better-auth/plugins";
 import { format } from "date-fns";
+import { Plus } from "lucide-react";
 
-import { UserTableSort as Sort } from "./user-table-sort";
+import { UserRole } from "@/config/const";
+
+import { cn } from "@/lib/utils";
+
 import { DataTableProvider } from "@/components/shared/data-table-provider";
 import {
   DataTableFilterDebounce,
@@ -12,6 +16,7 @@ import {
   DataTableFilterSearch,
 } from "@/components/shared/filter/data-table";
 import { NoData } from "@/components/shared/no-data";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Table,
@@ -22,6 +27,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+import { CreateUserDialog } from "./create-user-dialog";
+import { UserTableActions } from "./user-table-actions";
+import { UserTableSort as Sort } from "./user-table-sort";
 
 interface UserTableProps {
   data: UserWithRole[];
@@ -44,6 +53,12 @@ const UserTable = ({ data, totalPages }: UserTableProps) => {
         <DataTableFilterSearch />
         <div className="flex flex-1 justify-end items-center gap-4 text-sm">
           <DataTableFilterLimit />
+          <CreateUserDialog>
+            <Button>
+              <Plus className="mr-2 h-4 w-4" />
+              Create User
+            </Button>
+          </CreateUserDialog>
         </div>
       </div>
 
@@ -64,6 +79,7 @@ const UserTable = ({ data, totalPages }: UserTableProps) => {
                 <TableHead>
                   <Sort column="createdAt">Created At</Sort>
                 </TableHead>
+                <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -71,9 +87,23 @@ const UserTable = ({ data, totalPages }: UserTableProps) => {
                 <TableRow key={user.id} className="h-12">
                   <TableCell className="pl-4">{user.name}</TableCell>
                   <TableCell>{user.email}</TableCell>
-                  <TableCell>{user.role}</TableCell>
                   <TableCell>
-                    {format(user.createdAt, "yyyy-MM-dd HH:mm:ss")}
+                    <Badge
+                      className={cn(
+                        "capitalize",
+                        user.role === UserRole.Admin &&
+                          "bg-purple-50 text-purple-700 dark:bg-purple-950 dark:text-purple-300",
+                      )}
+                      variant="secondary"
+                    >
+                      {user.role}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    {format(user.createdAt, "yyyy-MM-dd HH:mm")}
+                  </TableCell>
+                  <TableCell className="pr-4">
+                    <UserTableActions user={user} />
                   </TableCell>
                 </TableRow>
               ))}
@@ -87,7 +117,7 @@ const UserTable = ({ data, totalPages }: UserTableProps) => {
             </TableBody>
             <TableFooter>
               <TableRow className="h-12">
-                <TableCell colSpan={4}>
+                <TableCell colSpan={5}>
                   {totalPages > 1 && (
                     <div className="flex justify-end items-center gap-4">
                       <DataTableFilterPagination

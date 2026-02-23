@@ -19,7 +19,7 @@ export default async function AdminLayout({
   });
 
   if (!session) {
-    redirect(routes.home);
+    redirect(routes.login);
   }
 
   return (

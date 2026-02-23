@@ -6,6 +6,8 @@ import { routes } from "./config/routes";
 export async function proxy(req: NextRequest) {
   const url = req.nextUrl.clone();
 
+  if (req.method !== "GET") return NextResponse.next();
+
   const session = getSessionCookie(req);
 
   if (session && url.pathname.startsWith("/auth/")) {
