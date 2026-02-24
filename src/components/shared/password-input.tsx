@@ -4,18 +4,10 @@ import { useState } from "react";
 
 import { Input } from "@/components/ui/input";
 
-interface PasswordStrengthProps {
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  children?: React.ReactNode;
-}
-
 export const PasswordInput = ({
-  value,
-  onChange,
-  children,
+  className,
   ...props
-}: React.ComponentProps<"input"> & PasswordStrengthProps) => {
+}: React.ComponentProps<"input">) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const toggleShow = () => setShowPassword((v) => !v);
@@ -24,9 +16,7 @@ export const PasswordInput = ({
     <div className="relative">
       <Input
         type={showPassword ? "text" : "password"}
-        value={value}
-        onChange={onChange}
-        placeholder="Enter your password"
+        className={className}
         {...props}
       />
       <button

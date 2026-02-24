@@ -1,8 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useActionState, useEffect } from "react";
 import { toast } from "sonner";
+
+import { routes } from "@/config/routes";
 
 import { loginAction } from "@/app/auth/_actions/login";
 import type { ActionState } from "@/lib/action";
@@ -46,7 +49,12 @@ export const LoginForm = () => {
           <FieldError>{email?.error}</FieldError>
         </Field>
         <Field data-invalid={password?.errorAttr}>
-          <FieldLabel htmlFor="password">Password</FieldLabel>
+          <div className="flex items-center justify-between">
+            <FieldLabel htmlFor="password">Password</FieldLabel>
+            <Link href={routes.forgotPassword} className="hover:underline">
+              Forgot password?
+            </Link>
+          </div>
           <Input
             id="password"
             type="password"

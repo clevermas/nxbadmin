@@ -1,12 +1,15 @@
 import Link from "next/link";
 
 import { RegisterForm } from "@/components/auth/register-form";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function Register() {
   return (
     <Card className="w-full">
-      <CardContent className="flex flex-col gap-4 pt-6">
+      <CardHeader>
+        <CardTitle>Register</CardTitle>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-4">
         <RegisterForm />
         <div className="text-center text-sm text-muted-foreground">
           Already have an account?{" "}
