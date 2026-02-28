@@ -73,12 +73,11 @@ export const UpdateUserPasswordForm = ({
     <FormProvider {...form}>
       <form
         onSubmit={handleSubmit(onBeforeConfirm)}
-        className="flex w-full flex-col gap-5"
+        className="grid gap-5 sm:grid-cols-2"
       >
-        <input type="hidden" name="userId" value={user.id} />
         <EditUserPasswordFields />
 
-        <div className="space-y-4 pt-4 mt-auto">
+        <div className="pt-2">
           <SubmitButton {...submit}>Change</SubmitButton>
           <ConfirmDialog
             title="Are you sure?"

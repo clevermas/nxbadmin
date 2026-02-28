@@ -3,11 +3,11 @@ import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
+import { AdminContainer } from "@/components/admin/admin-container";
 import { UpdateUserDetailsForm } from "@/components/admin/update-user-details-form";
 import { UpdateUserPasswordForm } from "@/components/admin/update-user-password-form";
 import { NoData } from "@/components/shared/no-data";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 
 interface AdminUserProfilePageProps {
   params: Promise<{ id: string }>;
@@ -44,23 +44,26 @@ export default async function AdminUserProfilePage({
   }
 
   return (
-    <section className="flex flex-1 flex-col px-4 pb-4">
-      <Card className="pt-3 pb-7">
-        <CardHeader>
-          <CardTitle>Manage user</CardTitle>
-        </CardHeader>
-        <CardContent className="py-0 flex flex-col gap-8 lg:grid lg:grid-cols-[1fr_1px_1fr]">
-          <UpdateUserDetailsForm user={user} />
+    <section>
+      <AdminContainer className="space-y-8 mb-8">
+        <Card>
+          <CardHeader>
+            <CardTitle>Manage user</CardTitle>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-8">
+            <UpdateUserDetailsForm user={user} />
+          </CardContent>
+        </Card>
 
-          <Separator
-            orientation="vertical"
-            className="hidden lg:block"
-          ></Separator>
-          <Separator className="block lg:hidden"></Separator>
-
-          <UpdateUserPasswordForm user={user} />
-        </CardContent>
-      </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Change password</CardTitle>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-8">
+            <UpdateUserPasswordForm user={user} />
+          </CardContent>
+        </Card>
+      </AdminContainer>
     </section>
   );
 }

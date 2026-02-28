@@ -1,7 +1,7 @@
 import { toConstTuple } from "@/lib/utils";
 
 export enum UserRole {
-  Admin = "admin",
   User = "user",
+  Admin = "admin",
 }
 export const userRoles = toConstTuple(UserRole);

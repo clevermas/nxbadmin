@@ -70,11 +70,11 @@ export const UpdateUserDetailsForm = ({ user }: UpdateUserDetailsFormProps) => {
     <FormProvider {...form}>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex w-full flex-col gap-5"
+        className="grid gap-5 sm:grid-cols-2"
       >
         <EditUserDetailsFields />
 
-        <div className="space-y-4 pt-4">
+        <div className="pt-2">
           <SubmitButton {...submit}>Save</SubmitButton>
         </div>
       </form>
