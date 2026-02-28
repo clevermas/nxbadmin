@@ -6,4 +6,5 @@ export const routes = {
   resetPassword: "/auth/reset-password",
   admin: "/admin",
   adminUserManage: (id: string) => `/admin/user/${id}`,
+  adminProfileSettings: "/admin/profile-settings",
 };

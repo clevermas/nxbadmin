@@ -9,6 +9,7 @@ import { defaultFilterSearchParams, filterLoader } from "@/lib/filter";
 import { limitParser, pageParser, searchParser } from "@/schemas/filter.schema";
 import { sortParser } from "@/schemas/user-table.schema";
 
+import { AdminContainer } from "@/components/admin/admin-container";
 import { UserTableWrapper } from "@/components/admin/user-table";
 import { NoData } from "@/components/shared/no-data";
 
@@ -28,7 +29,11 @@ export default async function AdminUsersPage(props: PageProps) {
   const isAdmin = session?.user.role === "admin";
 
   if (!isAdmin) {
-    return <NoData />;
+    return (
+      <AdminContainer type="full-width" className="h-full">
+        <NoData />
+      </AdminContainer>
+    );
   }
 
   const { q, page, limit, sort, errors } = await filterLoader(
@@ -67,8 +72,12 @@ export default async function AdminUsersPage(props: PageProps) {
   }
 
   return (
-    <section className="flex flex-1 flex-col gap-4 px-4">
-      <UserTableWrapper data={users} totalPages={totalPages} />
+    <section>
+      <AdminContainer type="full-width">
+        <div className="flex flex-1 flex-col gap-4">
+          <UserTableWrapper data={users} totalPages={totalPages} />
+        </div>
+      </AdminContainer>
     </section>
   );
 }

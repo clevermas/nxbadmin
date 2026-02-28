@@ -1,7 +1,9 @@
 "use client";
 
-import { ChevronsUpDownIcon, LogOutIcon } from "lucide-react";
+import { ChevronsUpDownIcon, LogOutIcon, UserIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+
+import { routes } from "@/config/routes";
 
 import { authClient } from "@/lib/auth-client";
 
@@ -92,6 +94,13 @@ export const AdminSidebarUserMenu = ({ user }: AdminSidebarUserMenuProps) => {
                 </div>
               </div>
             </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              onClick={() => router.push(routes.adminProfileSettings)}
+            >
+              <UserIcon />
+              Profile Settings
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleLogout}>
               <LogOutIcon />

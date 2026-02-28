@@ -47,6 +47,15 @@ const hasAccess = async (res: ActionResponse) => {
   return true;
 };
 
+export const isLoggedIn = async (res: ActionResponse) => {
+  const session = await getSession();
+  if (!session) {
+    res.redirect(routes.login);
+    return false;
+  }
+  return true;
+};
+
 export function createAction<InputData extends z.ZodObject<z.ZodRawShape>>(
   validator: InputData,
   action: (
