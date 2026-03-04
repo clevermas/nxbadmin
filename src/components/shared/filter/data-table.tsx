@@ -71,7 +71,13 @@ export const DataTableFilterSearch = () => {
     startTransition,
   });
 
-  return <FilterSearch disabled={transition} {...search}></FilterSearch>;
+  return (
+    <FilterSearch
+      disabled={transition}
+      className="sm:flex-1 lg:max-w-xs"
+      {...search}
+    ></FilterSearch>
+  );
 };
 
 // Debounce

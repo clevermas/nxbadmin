@@ -13,6 +13,7 @@ interface FilterSearchProps {
   searchRef: React.RefObject<HTMLInputElement | null>;
   inputValue: string;
   disabled?: boolean;
+  className?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClear: () => void;
 }
@@ -20,11 +21,12 @@ export const FilterSearch = ({
   searchRef,
   inputValue,
   disabled,
+  className,
   onChange,
   onClear,
 }: FilterSearchProps) => {
   return (
-    <InputGroup className="max-w-xs">
+    <InputGroup className={className}>
       <InputGroupInput
         ref={searchRef}
         value={inputValue}

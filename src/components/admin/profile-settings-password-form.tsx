@@ -64,7 +64,7 @@ export const ProfileSettingsPasswordForm = () => {
       onSubmit={handleSubmit(onBeforeConfirm)}
       className="grid gap-5 sm:grid-cols-2"
     >
-      <div className="grid grid-cols-subgrid col-span-2">
+      <div className="grid grid-cols-subgrid sm:col-span-2">
         <div className="col-start-1">
           <Field className="">
             <FieldLabel>Current Password</FieldLabel>

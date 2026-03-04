@@ -13,7 +13,6 @@ function makeClient() {
     env.NODE_ENV !== "production"
       ? new PrismaPg({ connectionString })
       : new PrismaNeon({ connectionString });
-
   return new PrismaClient({ adapter });
 }
 

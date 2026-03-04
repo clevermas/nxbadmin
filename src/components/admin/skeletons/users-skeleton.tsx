@@ -13,9 +13,11 @@ export const UsersSkeleton = () => {
         </div>
       </div>
       <div className="space-y-4.5">
-        {Array.from({ length: 12 }).map((_, i) => (
-          <Skeleton key={`${i + 1}`} className="w-full h-8" />
-        ))}
+        {Array.from({ length: 12 })
+          .map((_, i) => `skeleton-${i}`)
+          .map((id) => (
+            <Skeleton key={id} className="w-full h-8" />
+          ))}
       </div>
     </AdminContainer>
   );
