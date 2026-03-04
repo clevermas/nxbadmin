@@ -1,9 +1,8 @@
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { routes } from "@/config/routes";
 
-import { auth } from "@/lib/auth";
+import { getSession } from "@/lib/auth";
 
 import { AdminHeader } from "@/components/admin/admin-header";
 import { AdminProviders } from "@/components/admin/admin-providers";
@@ -15,12 +14,10 @@ export default async function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  const session = await getSession();
 
   if (!session) {
-    redirect(routes.login);
+    redirect(`${routes.login}?revoke_session`);
   }
 
   return (

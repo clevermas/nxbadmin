@@ -10,7 +10,11 @@ export async function proxy(req: NextRequest) {
 
   const session = getSessionCookie(req);
 
-  if (session && url.pathname.startsWith("/auth/")) {
+  if (
+    session &&
+    url.pathname.startsWith("/auth/") &&
+    !url.searchParams.has("revoke_session")
+  ) {
     return NextResponse.redirect(new URL(routes.admin, req.url));
   }
 

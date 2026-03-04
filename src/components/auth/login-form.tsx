@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useActionState, useEffect } from "react";
 import { toast } from "sonner";
 
 import { routes } from "@/config/routes";
 
 import { loginAction } from "@/app/auth/_actions/login";
+import { revokeSession } from "@/app/auth/_actions/revoke-session";
 import type { ActionState } from "@/lib/action";
 import { actionStateFormHandler, initialActionState } from "@/lib/form";
 import type { LoginSchema } from "@/schemas/auth.schema";
@@ -23,6 +24,19 @@ export const LoginForm = () => {
   );
 
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const isRevokingSession = searchParams.get("revoke_session") !== null;
+
+  useEffect(() => {
+    if (isRevokingSession) {
+      const revoke = async () => {
+        await revokeSession();
+        router.replace(routes.login);
+      };
+
+      revoke();
+    }
+  }, [router, isRevokingSession]);
 
   useEffect(() => {
     if (state.success) {
