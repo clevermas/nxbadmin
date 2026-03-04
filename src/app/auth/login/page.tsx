@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Suspense } from "react";
 
 import { routes } from "@/config/routes";
 
@@ -12,7 +13,9 @@ export default function Login() {
         <CardTitle>Login</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
-        <LoginForm />
+        <Suspense>
+          <LoginForm />
+        </Suspense>
         <div className="flex justify-center gap-1">
           <div className="text-sm text-muted-foreground">Not registered?</div>
           <Link href={routes.register} className="hover:underline">
