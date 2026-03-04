@@ -8,9 +8,6 @@ import { UserRole } from "@/config/const";
 
 import { cn } from "@/lib/utils";
 
-import { CreateUserDialog } from "./create-user-dialog";
-import { UserTableActions } from "./user-table-actions";
-import { UserTableSort as Sort } from "./user-table-sort";
 import { DataTableProvider } from "@/components/shared/data-table-provider";
 import {
   DataTableFilterDebounce,
@@ -31,6 +28,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { CreateUserDialog } from "./create-user-dialog";
+import { UserTableActions } from "./user-table-actions";
+import { UserTableSort as Sort } from "./user-table-sort";
 
 interface UserTableProps {
   data: UserWithRole[];
@@ -71,7 +71,7 @@ const UserTable = ({ data, totalPages }: UserTableProps) => {
                   <Sort column="name">Name</Sort>
                 </TableHead>
                 <TableHead>
-                  <Sort column="verified">Email</Sort>
+                  <Sort column="email">Email</Sort>
                 </TableHead>
                 <TableHead>
                   <Sort column="emailVerified">Verified</Sort>

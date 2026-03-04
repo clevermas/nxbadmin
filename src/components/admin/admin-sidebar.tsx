@@ -1,13 +1,18 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import type * as React from "react";
 
-import { AdminSidebarNav } from "./admin-sidebar-nav";
-import { AdminSidebarUserMenu } from "./admin-sidebar-user-menu";
+import { routes } from "@/config/routes";
+
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
 } from "@/components/ui/sidebar";
+import { AdminSidebarNav } from "./admin-sidebar-nav";
+import { AdminSidebarUserMenu } from "./admin-sidebar-user-menu";
 
 const nav = [
   {
@@ -16,8 +21,11 @@ const nav = [
     items: [
       {
         title: "Users",
-        url: "/admin",
-        isActive: true,
+        url: routes.admin,
+      },
+      {
+        title: "Profile Settings",
+        url: routes.adminProfileSettings,
       },
     ],
   },
@@ -30,10 +38,12 @@ interface AdminSidebarProps {
   };
 }
 
-export const AdminSidebar = async ({
+export const AdminSidebar = ({
   user,
   ...props
 }: AdminSidebarProps & React.ComponentProps<typeof Sidebar>) => {
+  const path = usePathname();
+
   const { name, email } = user;
 
   return (
@@ -42,7 +52,7 @@ export const AdminSidebar = async ({
         <AdminSidebarUserMenu user={{ name, email }} />
       </SidebarHeader>
       <SidebarContent>
-        <AdminSidebarNav items={nav} />
+        <AdminSidebarNav items={nav} path={path} />
       </SidebarContent>
       <SidebarFooter></SidebarFooter>
     </Sidebar>

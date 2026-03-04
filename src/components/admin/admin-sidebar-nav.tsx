@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import type * as React from "react";
 
@@ -12,6 +14,7 @@ import {
 
 type AdminSidebarNavProps = {
   items: NavGroupItem[];
+  path: string;
 };
 
 type NavGroupItem = {
@@ -24,10 +27,9 @@ type NavGroupItem = {
 type NavItem = {
   title: string;
   url: string;
-  isActive?: boolean;
 };
 
-export const AdminSidebarNav = ({ items }: AdminSidebarNavProps) => {
+export const AdminSidebarNav = ({ items, path }: AdminSidebarNavProps) => {
   return items.map((item) => (
     <SidebarGroup key={item.title}>
       <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
@@ -35,7 +37,7 @@ export const AdminSidebarNav = ({ items }: AdminSidebarNavProps) => {
         <SidebarMenu>
           {item.items?.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton asChild isActive={item.isActive}>
+              <SidebarMenuButton asChild isActive={item.url === path}>
                 <Link href={item.url}>{item.title}</Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
