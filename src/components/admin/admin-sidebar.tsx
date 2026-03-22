@@ -5,14 +5,15 @@ import type * as React from "react";
 
 import { routes } from "@/config/routes";
 
-import { AdminSidebarNav } from "./admin-sidebar-nav";
-import { AdminSidebarUserMenu } from "./admin-sidebar-user-menu";
+import { ThemeToggle } from "@/components/shared/theme-toggle";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
 } from "@/components/ui/sidebar";
+import { AdminSidebarNav } from "./admin-sidebar-nav";
+import { AdminSidebarUserMenu } from "./admin-sidebar-user-menu";
 
 const nav = [
   {
@@ -54,7 +55,10 @@ export const AdminSidebar = ({
       <SidebarContent>
         <AdminSidebarNav items={nav} path={path} />
       </SidebarContent>
-      <SidebarFooter></SidebarFooter>
+      <SidebarFooter className="flex-row justify-between items-center">
+        <div className="text-sm ml-2">nxbadmin</div>
+        <ThemeToggle />
+      </SidebarFooter>
     </Sidebar>
   );
 };

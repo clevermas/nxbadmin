@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function Register() {
   return (
-    <Card className="w-full">
+    <Card>
       <CardHeader>
         <CardTitle>Register</CardTitle>
       </CardHeader>

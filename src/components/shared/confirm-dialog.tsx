@@ -1,7 +1,5 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -13,7 +11,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { buttonVariants } from "@/components/ui/button";
 
 interface ConfirmDialogProps {
   open: boolean;
@@ -48,13 +45,7 @@ export const ConfirmDialog = ({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>{cancelText}</AlertDialogCancel>
-          <AlertDialogAction
-            onClick={onConfirm}
-            className={cn(
-              variant === "destructive" &&
-                buttonVariants({ variant: "destructive" }),
-            )}
-          >
+          <AlertDialogAction onClick={onConfirm} variant={variant}>
             {confirmText}
           </AlertDialogAction>
         </AlertDialogFooter>

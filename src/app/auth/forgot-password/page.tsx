@@ -13,7 +13,7 @@ import {
 
 export default function ForgotPassword() {
   return (
-    <Card className="w-full">
+    <Card>
       <CardHeader>
         <CardTitle>Forgot Password</CardTitle>
         <CardDescription>

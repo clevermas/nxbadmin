@@ -15,7 +15,7 @@ import {
 export default async function ResetPassword({ searchParams }: PageProps) {
   const { token } = await searchParams;
   return (
-    <Card className="w-full">
+    <Card>
       <CardHeader>
         <CardTitle>Reset Password</CardTitle>
         {token && (
