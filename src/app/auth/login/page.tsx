@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function Login() {
   return (
-    <Card className="w-full">
+    <Card>
       <CardHeader>
         <CardTitle>Login</CardTitle>
       </CardHeader>
